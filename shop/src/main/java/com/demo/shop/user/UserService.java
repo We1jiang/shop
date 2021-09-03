@@ -18,11 +18,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<UserAccount> getProducts() {
+    public List<UserAccount> getUsers() {
         return userRepository.findAll();
     }
 
-    public void addProduct(UserAccount user) {
+    public void createUser(UserAccount user) {
         Optional<UserAccount> productByCostCode = userRepository.findUserByEmail(user.getEmail());
 
         if (productByCostCode.isPresent()) {
@@ -32,7 +32,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteProduct(Long userID) {
+    public void deleteUser(Long userID) {
         boolean exists = userRepository.existsById(userID);
 
         if (!exists) {
@@ -43,11 +43,11 @@ public class UserService {
 
     }
 
-    public void updateProduct(long userID, UserAccount user) {
+    public void updateUser(long userID, UserAccount user) {
         UserAccount target = userRepository.findById(userID)
                 .orElseThrow(() -> new IllegalStateException("user" + userID + "does not exists"));
 
-        target.setName(user.getName());
+        target.setUserName(user.getUserName());
         target.setEmail(user.getEmail());
         target.setPassword(user.getPassword());
     }
