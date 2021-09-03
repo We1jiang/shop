@@ -1,7 +1,6 @@
 package com.demo.shop.security;
 
 import com.google.common.collect.Sets;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Set;
@@ -11,7 +10,7 @@ import static com.demo.shop.security.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
     CLIENT(Sets.newHashSet()),
-    ADMIN(Sets.newHashSet(ADMIN_READ,ADMIN_WRITE,CLIENT_READ,CLIENT_WRITE));
+    ADMIN(Sets.newHashSet(USER_READ, USER_WRITE, PRODUCT_READ, PRODUCT_WRITE));
 
     private final Set<ApplicationUserPermission> permissions;
 

@@ -20,25 +20,25 @@ public class shopController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('product:read')")
     public List<Product> getProducts() {
         return productService.getProducts();
     }
 
     @PostMapping("/add")
-    @PreAuthorize("hasAuthority('admin:write')")
+    @PreAuthorize("hasAuthority('product:write')")
     public void addNewProduct(@RequestBody Product product) {
         productService.addProduct(product);
     }
 
     @DeleteMapping("{productID}")
-    @PreAuthorize("hasAuthority('admin:write')")
+    @PreAuthorize("hasAuthority('product:write')")
     public void deleteProduct(@PathVariable("productID") Long id) {
         productService.deleteProduct(id);
     }
 
     @PutMapping("{productID}")
-    @PreAuthorize("hasAuthority('admin:write')")
+    @PreAuthorize("hasAuthority('product:write')")
     public void updateProduct(
             @PathVariable("productID") long productID,
             @RequestParam Product product) {

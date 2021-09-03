@@ -19,30 +19,30 @@ public class UserController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('user:read')")
     public List<UserAccount> getUsers() {
         return UserService.getUsers();
     }
 
-    @PostMapping("/add")
-    @PreAuthorize("hasAuthority('admin:write')")
+    @PostMapping("/register")
+    @PreAuthorize("hasAuthority('user:write')")
     public void registerNewUser(@RequestBody UserAccount user) {
         UserService.createUser(user);
     }
 
-    @DeleteMapping("{productID}")
-    @PreAuthorize("hasAuthority('admin:write')")
-    public void deleteUser(@PathVariable("productID") Long id) {
-        UserService.deleteUser(id);
+    @DeleteMapping("{userID}")
+    @PreAuthorize("hasAuthority('user:write')")
+    public void deleteUser(@PathVariable("userID") Long userID) {
+        UserService.deleteUser(userID);
     }
 
-    @PutMapping("{productID}")
-    @PreAuthorize("hasAuthority('admin:write')")
+    @PutMapping("{userID}")
+    @PreAuthorize("hasAuthority('user:write')")
     public void updateUserDetail(
-            @PathVariable("productID") long productID,
+            @PathVariable("userID") long userID,
             @RequestParam UserAccount userAccount) {
 
-        UserService.updateUser(productID, userAccount);
+        UserService.updateUser(userID, userAccount);
 
     }
 }
